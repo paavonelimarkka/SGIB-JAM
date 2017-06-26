@@ -1,2 +1,4 @@
 # SGIB-JAM
-"So good it's bad" Game Jam entry
+
+Our "So good it's bad" Game Jam entry.
+https://itch.io/jam/so-bad-its-good-jam
