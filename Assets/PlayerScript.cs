@@ -6,28 +6,46 @@ public class PlayerScript : MonoBehaviour {
 
 	public GameObject leftLeg,rightLeg,leftArm,rightArm;
 
-	private HingeJoint leftLegJoint, rightLegJoint, leftArmJoint, rightArmJoint;
+	private JointMotor leftLegJoint, rightLegJoint, leftArmJoint, rightArmJoint;
+
+	public float speed;
 	// Use this for initialization
 	void Start () {
-		leftLegJoint = leftLeg.GetComponent<HingeJoint> ();
-		rightLegJoint = rightLeg.GetComponent<HingeJoint> ();
-		leftArmJoint = leftArm.GetComponent<HingeJoint> ();
-		rightArmJoint = rightArm.GetComponent<HingeJoint> ();
+		leftLegJoint = leftLeg.GetComponent<HingeJoint> ().motor;
+		rightLegJoint = rightLeg.GetComponent<HingeJoint> ().motor;
+		leftArmJoint = leftArm.GetComponent<HingeJoint> ().motor;
+		rightArmJoint = rightArm.GetComponent<HingeJoint> ().motor;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.D)) {
-			leftLegJoint.motor.force = 100;
+			leftLegJoint.force = speed;
 		}
 		if (Input.GetKeyDown (KeyCode.F)) {
-			leftArmJoint.motor.force = 100;
+			leftArmJoint.force = speed;
 		}
 		if (Input.GetKeyDown (KeyCode.J)) {
-			rightArmJoint.motor.force = 100;
+			rightArmJoint.force = speed;
 		}
 		if (Input.GetKeyDown (KeyCode.K)) {
-			rightLegJoint.motor.force = 100;
+			rightLegJoint.force = speed;
 		}
+		if (Input.GetKeyUp (KeyCode.D)) {
+			leftLegJoint.force = 0;
+		}
+		if (Input.GetKeyUp (KeyCode.F)) {
+			leftArmJoint.force = 0;
+		}
+		if (Input.GetKeyUp (KeyCode.J)) {
+			rightArmJoint.force = 0;
+		}
+		if (Input.GetKeyUp (KeyCode.K)) {
+			rightLegJoint.force = 0;
+		}
+		leftLeg.GetComponent<HingeJoint> ().motor = leftLegJoint;
+		rightLeg.GetComponent<HingeJoint> ().motor = rightLegJoint;
+		leftArm.GetComponent<HingeJoint> ().motor = leftArmJoint;
+		rightArm.GetComponent<HingeJoint> ().motor = rightArmJoint;
 	}
 }
